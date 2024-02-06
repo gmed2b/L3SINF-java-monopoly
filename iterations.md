@@ -9,6 +9,7 @@
   - Bateau, Dé à coudre, Chien, Chapeau, Chaussure
   - 🚢 | 🗑️ | 🐕 | 🎩 | 👞
 - 2 dés
+- Deux joueurs
 
 ### Règle
 
@@ -33,8 +34,8 @@ CLI
 ### Données du jeu
 
 - Argent : 1, 5, 10, 20, 50, 100, 500
-- Plateau : Ajout des noms de rue, groupe de couleurs et tarifs d'achats par cases
-  - Marron, bleu ciel, magenta, orange, rouge, jaune, vert, bleu
+- Plateau : Ajout des noms de rue, groupe de couleurs et propriétés
+  - Couleurs : marron, bleu ciel, magenta, orange, rouge, jaune, vert, bleu
 
 ### Règle
 
@@ -70,4 +71,10 @@ Les cartes chances et communautés peuvent être tirés par les joueurs qui sont
 
 ### Données du jeu
 
-- Propriété : Système de loyer en fonction de la valeur du terrain.
+- Ajout des maisons et hôtels dans les propriétés
+
+### Règle
+
+Les joueurs peuvent acheter des maisons et des hôtels pour augmenter le loyer des propriétés.
+
+---
