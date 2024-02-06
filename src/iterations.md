@@ -19,7 +19,7 @@ Le premier à faire 3 tours de plateau gagne.
 
 ### Scénario
 
-Nombre de tour peut être choisi avant le début de la partie.
+Nombre de tour (tour de plateau) peut être choisi avant le début de la partie.
 Les joueurs se déplace tour à tour.
 La partie s'arrête lorsque le premier joueur à effectuer le nombre de tour défini.
 
@@ -32,10 +32,10 @@ CLI
 ## Itération 2
 
 ### Données du jeu
-
 - Argent : 1, 5, 10, 20, 50, 100, 500
 - Plateau : Ajout des noms de rue, groupe de couleurs et propriétés
   - Couleurs : marron, bleu ciel, magenta, orange, rouge, jaune, vert, bleu
+  - Ajout des prix aux propriétés
 
 ### Règle
 
@@ -71,7 +71,8 @@ Les cartes chances et communautés peuvent être tirés par les joueurs qui sont
 
 ### Données du jeu
 
-- Ajout des maisons et hôtels dans les propriétés
+- Loyer des propriétés
+- Ajout des maisons et hôtels dans les propriété
 
 ### Règle
 
