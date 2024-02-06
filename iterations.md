@@ -57,6 +57,7 @@ La partie s'arrête lorsque toutes les propriétés sont vendus.
 
 ### Données du jeu
 
+- Plateau : Type de cases : Propriété, gares, companies, chance, communauté
 - Cartes : Chance & Communauté
 
 ### Règle
