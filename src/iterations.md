@@ -15,7 +15,7 @@
 
 Les joueurs sont positionnés à la case départ (case 0).
 A chaque tour, le joueur lance les dés et déplace son pion.
-Le premier à faire 3 tours de plateau gagne.
+Le premier à faire X tours de plateau gagne.
 
 ### Scénario
 
