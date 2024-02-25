@@ -5,8 +5,12 @@ import java.util.Arrays;
 public class Plateau {
     private int[] cases;
 
+
     public Plateau(int nbCases) {
         this.setCases(nbCases);
+    }
+    public Plateau() {
+        this(40);
     }
 
     @Override
@@ -18,6 +22,10 @@ public class Plateau {
 
     public int[] getCases() {
         return cases;
+    }
+
+    public int getTaille() {
+        return this.cases.length;
     }
 
     public void setCases(int nbCases) {
