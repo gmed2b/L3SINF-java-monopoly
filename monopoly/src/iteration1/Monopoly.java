@@ -9,7 +9,6 @@ public class Monopoly {
     public static De de1;
     public static De de2;
     private List<Joueur> joueurs;
-    private int nbTours = 0;
     private boolean partieEnCours = false;
 
     public Monopoly() {
@@ -53,12 +52,11 @@ public class Monopoly {
                 // 5- Double, relancer
 
                 // 6- Fin de tour
-                joueurActuel.finDeTour();
                 System.out.println("===== FIN DU TOUR =====");
                 System.out.println();
 
                 // Iteration 1- Verification du gagnant
-                if (joueurActuel.getNbTour() == 2) {
+                if (joueurActuel.getNbTours() == 3) {
                     System.out.println("Félicitation ! Le joueur " + (i+1) + " à gagné.");
                     this.partieEnCours = false;
                     break;

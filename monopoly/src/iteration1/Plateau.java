@@ -24,14 +24,15 @@ public class Plateau {
         return cases;
     }
 
-    public int getTaille() {
-        return this.cases.length;
-    }
-
     public void setCases(int nbCases) {
         this.cases = new int[nbCases];
         for (int i = 0; i < nbCases; i++) {
             cases[i] = i;
         }
     }
+
+    public int getTaille() {
+        return this.cases.length;
+    }
+
 }
