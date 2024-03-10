@@ -1,6 +1,4 @@
-package iteration1;
-
-import java.util.Arrays;
+package iteration2;
 
 public class Plateau {
 
@@ -12,13 +10,6 @@ public class Plateau {
 
     public Plateau() {
         this(40);
-    }
-
-    @Override
-    public String toString() {
-        return "Plateau{" +
-                "cases=" + Arrays.toString(cases) +
-                '}';
     }
 
     public int[] getCases() {

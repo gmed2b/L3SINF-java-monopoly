@@ -1,4 +1,4 @@
-package iteration1;
+package iteration2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +26,8 @@ public class Monopoly {
         this.setJoueurs(2);
 
         System.out.println("Initialisation terminée. La partie peut commencer.");
+        System.out.println();
+
         this.partieEnCours = true;
         this.commencerPartie();
     }
@@ -39,18 +41,25 @@ public class Monopoly {
                 System.out.println();
 
                 System.out.println("===== JOUEUR " + (i + 1) + " =====");
+                System.out.println(joueurActuel.getSolde());
+                System.out.println();
+
                 Cli.pressToContinue("Appuyez sur Entrée pour lancer les dés ...");
 
                 // 1- Lancer les dés
                 int scoreDes = joueurActuel.lancerDes();
                 System.out.println("Vous avez fait " + scoreDes);
+                System.out.println();
 
                 // 2- Bouger le pion
                 joueurActuel.seDeplacer(scoreDes, this.plateau.getTaille());
 
-                // 3- Fin de tour
-                Cli.pressToContinue("===== FIN DU TOUR =====");
+                // 3- Action case
+                // 4- Passé par la case depart
+                // 5- Double, relancer
 
+                // 6- Fin de tour
+                Cli.pressToContinue("=== FIN DU TOUR ===");
                 // Effacer la console pour le prochain joueur
                 System.out.print("\033\143");
 

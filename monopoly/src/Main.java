@@ -1,14 +1,19 @@
-import iteration1.Monopoly;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import iteration2.Case;
+import iteration2.GroupeTerrain;
+import iteration2.Terrain;
 
 public class Main {
 
-    static Scanner reader = new Scanner(System.in);
-
     public static void main(String[] args) {
-        Monopoly monopoly = new Monopoly();
+        // Monopoly jeu = new Monopoly();
+        // jeu.initialisationPartie();
+
+        /**
+         * Test de la classe Case
+         */
+        Case blvrdBelleville = new Terrain("Boulevard de Belleville", 1, GroupeTerrain.MARRON);
+        System.out.println(blvrdBelleville);
+
     }
 
 }
