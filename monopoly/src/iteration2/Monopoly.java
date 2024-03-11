@@ -55,6 +55,9 @@ public class Monopoly {
                 joueurActuel.seDeplacer(scoreDes, this.plateau.getTaille());
 
                 // 3- Action case
+                Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
+                System.out.println("Vous êtes sur la case " + caseActuelle.getNom());
+
                 // 4- Passé par la case depart
                 // 5- Double, relancer
 
