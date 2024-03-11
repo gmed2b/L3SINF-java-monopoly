@@ -41,7 +41,7 @@ public class Monopoly {
                 System.out.println();
 
                 System.out.println("===== JOUEUR " + (i + 1) + " =====");
-                System.out.println(joueurActuel.getSolde());
+                System.out.println("Solde: " + joueurActuel.getSolde() + "€");
                 System.out.println();
 
                 Cli.pressToContinue("Appuyez sur Entrée pour lancer les dés ...");
@@ -58,10 +58,26 @@ public class Monopoly {
                 Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
                 System.out.println("Vous êtes sur la case " + caseActuelle.getNom());
 
-                // 4- Passé par la case depart
-                // 5- Double, relancer
+                if (caseActuelle instanceof Propriete) {
+                    Propriete propriete = (Propriete) caseActuelle;
+
+                    if (propriete.getProprietaire() == null) {
+                        String reponse = Cli
+                                .prompt("Voulez-vous acheter cette propriété pour " + propriete.getTarif() + "€ ?");
+                        if (reponse.equals("o")) {
+                            joueurActuel.acheterPropriete(propriete);
+                            System.out.println("Vous avez acheté " + propriete.getNom());
+                            System.out.println("Votre solde est maintenant de " + joueurActuel.getSolde() + "€");
+                        }
+                    } else if (propriete.getProprietaire() != joueurActuel) {
+                        System.out.println("La propriété appartient à " + propriete.getProprietaire().getNom());
+                    } else {
+                        System.out.println("Vous êtes sur votre propriété.");
+                    }
+                }
 
                 // 6- Fin de tour
+                System.out.println();
                 Cli.pressToContinue("=== FIN DU TOUR ===");
                 // Effacer la console pour le prochain joueur
                 System.out.print("\033\143");

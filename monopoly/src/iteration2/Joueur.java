@@ -1,13 +1,55 @@
 package iteration2;
 
 public class Joueur {
+
+    private static int NB_INSTANCE = 0;
+
+    private String nom;
     private int position = 0;
     private int nbTours = 0;
-    private Solde solde;
+    private int solde;
+
+    public Joueur(String nom) {
+        setNom(nom);
+        this.solde = 1500; // Initialisation du solde du joueur par défaut
+
+        NB_INSTANCE++;
+    }
 
     public Joueur() {
-        // Initialisation du solde du joueur par défaut
-        this.solde = new Solde();
+        this("Joueur " + NB_INSTANCE);
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        if (nom == null || nom.isEmpty()) {
+            throw new IllegalArgumentException("Le nom du joueur ne peut pas être vide.");
+        }
+        this.nom = nom;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public int getNbTours() {
+        return nbTours;
+    }
+
+    public int getSolde() {
+        return solde;
+    }
+
+    public void acheterPropriete(Propriete propriete) {
+        try {
+            this.debiter(propriete.getTarif());
+            propriete.setProprietaire(this);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -43,15 +85,16 @@ public class Joueur {
         return lancer1 + lancer2;
     }
 
-    public int getPosition() {
-        return position;
+    public void debiter(int montant) throws Exception {
+        int nouveauSolde = this.solde - montant;
+        if (nouveauSolde < 0) {
+            throw new Exception("Vous n'avez pas assez d'argent pour effectuer cette opération.");
+        }
+        this.solde = nouveauSolde;
     }
 
-    public int getNbTours() {
-        return nbTours;
+    public void crediter(int montant) {
+        this.solde += montant;
     }
 
-    public Solde getSolde() {
-        return solde;
-    }
 }
