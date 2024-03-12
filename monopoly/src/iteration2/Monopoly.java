@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Monopoly {
 
+    private final static int NB_TOURS_AVANT_ACHAT = 1;
+
     private Plateau plateau;
     private List<Joueur> joueurs;
     public static De de1;
     public static De de2;
-    private boolean partieEnCours = false;
-    private int nbToursVictorieux = 3;
 
     public Monopoly() {
         this.plateau = new Plateau();
@@ -28,20 +28,19 @@ public class Monopoly {
         System.out.println("Initialisation terminée. La partie peut commencer.");
         System.out.println();
 
-        this.partieEnCours = true;
         this.commencerPartie();
     }
 
     private void commencerPartie() {
-        while (this.partieEnCours) {
+        while (this.partieToujoursEnCours()) {
             for (int i = 0; i < joueurs.size(); i++) {
 
                 Joueur joueurActuel = joueurs.get(i);
                 this.afficherPlateau();
                 System.out.println();
 
-                System.out.println("===== JOUEUR " + (i + 1) + " =====");
-                System.out.println(joueurActuel.getSolde());
+                System.out.println("===== " + joueurActuel.getNom() + " =====");
+                System.out.println("Solde: " + joueurActuel.getSolde() + "€");
                 System.out.println();
 
                 Cli.pressToContinue("Appuyez sur Entrée pour lancer les dés ...");
@@ -55,20 +54,37 @@ public class Monopoly {
                 joueurActuel.seDeplacer(scoreDes, this.plateau.getTaille());
 
                 // 3- Action case
-                // 4- Passé par la case depart
-                // 5- Double, relancer
+                Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
+                System.out.println("Vous êtes sur la case " + caseActuelle.getNom());
+
+                if (caseActuelle instanceof Propriete) {
+                    Propriete propriete = (Propriete) caseActuelle;
+
+                    if (joueurActuel.getNbTours() < NB_TOURS_AVANT_ACHAT) {
+                        if (propriete.getProprietaire() == null) {
+                            String reponse = Cli
+                                    .prompt("Voulez-vous acheter cette propriété pour " + propriete.getTarif() + "€ ?");
+                            if (reponse.equals("o")) {
+                                joueurActuel.acheterPropriete(propriete);
+                                System.out.println("Vous avez acheté " + propriete.getNom());
+                                System.out.println("Votre solde est maintenant de " + joueurActuel.getSolde() + "€");
+                            }
+                        } else if (propriete.getProprietaire() != joueurActuel) {
+                            System.out.println("La propriété appartient à " + propriete.getProprietaire().getNom());
+                        } else {
+                            System.out.println("Vous êtes sur votre propriété.");
+                        }
+                    } else {
+                        System.out.println("Vous ne pouvez pas acheter cette propriété pour le moment.");
+                    }
+                }
 
                 // 6- Fin de tour
+                System.out.println();
                 Cli.pressToContinue("=== FIN DU TOUR ===");
                 // Effacer la console pour le prochain joueur
                 System.out.print("\033\143");
 
-                // Iteration 1- Verification du gagnant
-                if (joueurActuel.getNbTours() == this.nbToursVictorieux) {
-                    System.out.println("Félicitation ! Le joueur " + (i + 1) + " à gagné.");
-                    this.partieEnCours = false;
-                    break;
-                }
             }
 
         }
@@ -76,9 +92,22 @@ public class Monopoly {
         Cli.pressToContinue("");
     }
 
+    private boolean partieToujoursEnCours() {
+        for (int i = 0; i < this.plateau.getTaille(); i++) {
+            Case c = this.plateau.getCase(i);
+            if (c instanceof Propriete) {
+                Propriete p = (Propriete) c;
+                if (p.getProprietaire() == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void afficherPlateau() {
         // Plateau
-        System.out.println(Arrays.toString(this.plateau.getCases()));
+        System.out.println(Arrays.toString(this.plateau.getCasesIndexees()));
 
         // Joueurs
         for (int i = 0; i < joueurs.size(); i++) {
