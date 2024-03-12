@@ -12,7 +12,7 @@ public class Plateau {
         return this.cases.length;
     }
 
-    public int[] getCases() {
+    public int[] getCasesIndexees() {
         int[] p = new int[40];
         for (int i = 0; i < 40; i++) {
             p[i] = i;
