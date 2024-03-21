@@ -27,7 +27,6 @@ public class Monopoly {
 
         System.out.println("Initialisation terminée. La partie peut commencer.");
         System.out.println();
-
         this.commencerPartie();
     }
 
@@ -60,7 +59,7 @@ public class Monopoly {
                 if (caseActuelle instanceof Propriete) {
                     Propriete propriete = (Propriete) caseActuelle;
 
-                    if (joueurActuel.getNbTours() < NB_TOURS_AVANT_ACHAT) {
+                    if (joueurActuel.getNbTours() >= NB_TOURS_AVANT_ACHAT) {
                         if (propriete.getProprietaire() == null) {
                             String reponse = Cli
                                     .prompt("Voulez-vous acheter cette propriété pour " + propriete.getTarif() + "€ ?");

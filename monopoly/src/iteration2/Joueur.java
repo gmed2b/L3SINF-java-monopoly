@@ -5,12 +5,14 @@ public class Joueur {
     private static int NB_INSTANCE = 0;
 
     private String nom;
-    private int position = 0;
-    private int nbTours = 0;
+    private int position;
+    private int nbTours;
     private int solde;
 
     public Joueur(String nom) {
         setNom(nom);
+        this.position = 0;
+        this.nbTours = 0;
         this.solde = 1500; // Initialisation du solde du joueur par défaut
 
         NB_INSTANCE++;

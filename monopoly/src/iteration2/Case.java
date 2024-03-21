@@ -2,7 +2,7 @@ package iteration2;
 
 public abstract class Case {
 
-    String nom;
+    public String nom;
 
     public Case(String nom) {
         setNom(nom);
