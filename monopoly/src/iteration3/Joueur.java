@@ -1,8 +1,8 @@
-package iteration2bisbis;
+package iteration3;
 
 public class Joueur {
 
-    private static int NB_INSTANCE = 0;
+    private static int NB_INSTANCE = 1;
 
     private String nom;
     private int position;
@@ -20,6 +20,14 @@ public class Joueur {
 
     public Joueur() {
         this("Joueur " + NB_INSTANCE);
+    }
+
+    @Override
+    public String toString() {
+        return this.getNom() + " {" +
+                "nbTours=" + this.getNbTours() +
+                ", solde=" + this.getSolde() +
+                '}';
     }
 
     public String getNom() {
@@ -45,12 +53,14 @@ public class Joueur {
         return solde;
     }
 
-    public void acheterPropriete(Propriete propriete) {
+    public boolean acheterPropriete(Propriete propriete) {
         try {
             this.debiter(propriete.getTarifAchat());
             propriete.setProprietaire(this);
+            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

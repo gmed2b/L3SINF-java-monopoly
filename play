@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Enable autocompletion
+if [ -n "$BASH_VERSION" ]; then
+    _play_completion() {
+        local cur=${COMP_WORDS[COMP_CWORD]}
+        local files=$(for d in monopoly/src/iteration*/; do echo "${d%/}"; done)
+        COMPREPLY=( $(compgen -W "$files" -- $cur) )
+    }
+
+    complete -F _play_completion ./play
+fi
+
+# Vérification du nombre d'arguments
+if [ "$#" -ne 1 ]; then
+    echo "Usage: ./play <iteration>"
+    exit 1
+fi
+
+# Itération spécifiée en argument
+ITERATION="$1"
+
+# Chemin vers le répertoire contenant le code source
+SRC_DIR="monopoly/src"
+
+# Chemin vers le fichier Main.java
+MAIN_FILE="$SRC_DIR/Main.java"
+
+# Chemin vers le dossier où seront placés les fichiers .class compilés
+OUT_DIR="$SRC_DIR/out"
+
+# Création du dossier de sortie s'il n'existe pas
+mkdir -p "$OUT_DIR"
+
+# Compilation de Main.java et de toutes ses dépendances
+javac -d "$OUT_DIR" "$MAIN_FILE" "$SRC_DIR/$ITERATION/"*.java
+
+# Si la compilation réussit, exécuter le jeu
+if [ $? -eq 0 ]; then
+    java -classpath "$OUT_DIR" Main
+else
+    echo "La compilation a échoué. Veuillez corriger les erreurs avant de lancer le jeu."
+fi

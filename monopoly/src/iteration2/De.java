@@ -70,6 +70,6 @@ public class De {
      * @return a random number between 1 and the number of faces on this dice
      */
     public int lancer() {
-        return nbRandom.nextInt(BORNE_MIN_DEFAUT, this.nbFaces + 1);
+        return nbRandom.nextInt(this.nbFaces) + BORNE_MIN_DEFAUT;
     }
 }
