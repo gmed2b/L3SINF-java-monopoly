@@ -14,7 +14,6 @@ public class Main {
             System.out.println("Erreur lors de la lecture du fichier CSV");
             e.printStackTrace();
         }
-
     }
 
 }

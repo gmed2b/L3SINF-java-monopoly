@@ -1,5 +1,12 @@
 package iteration3;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Joueur {
 
     private static int NB_INSTANCE = 1;
@@ -109,4 +116,31 @@ public class Joueur {
         this.solde += montant;
     }
 
+     public String tirerCarte(Joueur joueur, String nomCase) {
+        String csvFilePath;
+        if (nomCase.equals("Chance")) {
+            csvFilePath = "monopoly/src/cartesChance.csv";
+        } else if (nomCase.equals("Caisse de communauté")) {
+            csvFilePath = "monopoly/src/cartesCaisseCommunaute.csv";
+        } else {
+            System.err.println("erreur case inconnue: " + nomCase);
+            return "Erreur";
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            List<String> cartes = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                cartes.add(line);
+            }
+            Random random = new Random();
+            int indexCarte = random.nextInt(cartes.size());
+            String carteTiree = cartes.get(indexCarte);
+            System.out.println("Le joueur " + joueur.getNom() + " tire la carte : " + carteTiree);
+            return carteTiree;
+        } catch (IOException e) {
+            System.err.println("CSV : Erreur lors de la lecture du fichier de cartes : " + e.getMessage());
+        }
+        return "Erreur";
+    }
 }
