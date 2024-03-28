@@ -23,7 +23,7 @@ public abstract class Propriete extends Case {
     }
 
     @Override
-    public void action(Joueur joueur) {
+    public void action(Joueur joueur, Plateau plateau) {
         if (joueur.getNbTours() < Monopoly.NB_TOURS_AVANT_ACHAT) {
             System.out.println("Vous ne pouvez pas acheter de propriété avant d'avoir fait "
                     + Monopoly.NB_TOURS_AVANT_ACHAT + " tours");
