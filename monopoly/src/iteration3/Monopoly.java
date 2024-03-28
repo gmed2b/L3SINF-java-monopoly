@@ -1,15 +1,18 @@
 package iteration3;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Monopoly {
 
     public final static int NB_TOURS_AVANT_ACHAT = 1;
     private final static int NB_JOUEURS = 2;
 
-    private Plateau plateau;
+    static Plateau plateau;
     private List<Joueur> joueurs;
     public static De de1;
     public static De de2;
@@ -22,7 +25,7 @@ public class Monopoly {
     }
 
     public void initialisationPartie() {
-        System.out.println("====== Monopoly ======");
+        System.out.println("====== Monopoly ======"); // à mettre dans une méthode de la classe Cli
 
         this.setNbJoueurs(NB_JOUEURS);
         Cli.printInitGameMessage(NB_JOUEURS);
@@ -85,5 +88,23 @@ public class Monopoly {
             Joueur joueur = new Joueur();
             this.joueurs.add(joueur);
         }
+    }
+    static int appliquerEffetCarte(Joueur joueur, String carteTiree) {
+        if (carteTiree.contains("Gagnez") || carteTiree.contains("Recevez")) {
+            // récupérer le montant (c'est le dernier mot de la phrase)
+            int montant = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 1].replace("€", ""));
+            return montant;
+        } else if (carteTiree.contains("Payez")) {
+            int montant = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 1].replace("€", ""));
+            return montant;
+        } else if (carteTiree.contains("Avancez")) {
+           // récupérer le nombre de case (c'est le avant dernier mot de la phrase)
+            int nbCases = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 2]);
+            return nbCases;
+        } else if (carteTiree.contains("Reculez")) {
+            int nbCases = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 2]);
+            return -nbCases;
+        }
+        return 0;
     }
 }
