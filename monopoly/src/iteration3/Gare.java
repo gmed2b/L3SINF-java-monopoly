@@ -6,14 +6,8 @@ public class Gare extends Propriete {
         super(nom, tarifAchat);
     }
 
-    @Override
-    public void action(Joueur joueur, Plateau plateau) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'action'");
-    }
-
     // @Override
-    // public void action(Joueur joueur) {
+    // public void action(Joueur joueur, Plateau plateau) {
     // if (this.getProprietaire() == null) {
     // boolean joueurVeutAcheter = Cli.acheterPropriete(this);
     // if (!joueurVeutAcheter)

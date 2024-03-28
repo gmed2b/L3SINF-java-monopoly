@@ -1,40 +1,40 @@
-E, Départ, -, -, DEPART
+E, Départ, null, null, DEPART
 T, Boulevard de Belleville, 60, MARRON
-E, Caisse de communauté -, -, COMMUNAUTE
+E, Caisse de communauté, null, null, COMMUNAUTE
 T, Rue Lecourbe, 60, MARRON
-E, Impôts sur le revenu -, -, IMPOTS
+E, Impôts sur le revenu, null, null, IMPOTS
 G, Gare Montparnasse, 200
 T, Rue de Vaugirard, 100, BLEU_CIEL
-E, Chance -, -, CHANCE
+E, Chance, null, null, CHANCE
 T, Rue de Courcelles, 100, BLEU_CIEL
 T, Avenue de la République, 120, BLEU_CIEL
-E, Simple visite -, -, VISITE
+E, Simple visite, null, null, VISITE
 T, Boulevard de la Villette, 140, ROSE
 S, Compagnie d'électricité, 150
 T, Avenue de Neuilly, 140, ROSE
 T, Rue du paradis, 160, ROSE
 G, Gare de Lyon, 200
 T, Avenue Mozart, 180, ORANGE
-E, Caisse de communauté -, -, COMMUNAUTE
-T, Boulevard Saint-Michel, 180, ORANGE
+E, Caisse de communauté, null, null, COMMUNAUTE
+T, Boulevard SaintnullMichel, 180, ORANGE
 T, Place Pigalle, 200, ORANGE
-E, Parc gratuit -, -, PARC
+E, Parc gratuit, null, null, PARC
 T, Avenue Matignon, 220, ROUGE
-E, Chance -, -, CHANCE
+E, Chance, null, null, CHANCE
 T, Boulevard Malesherbes, 220, ROUGE
-T, Avenue Henri-Martin, 240, ROUGE
+T, Avenue HenrinullMartin, 240, ROUGE
 G, Gare du Nord, 200
-T, Faubourg Saint-Honoré, 260, JAUNE
+T, Faubourg SaintnullHonoré, 260, JAUNE
 T, Place de la Bourse, 260, JAUNE
 S, Compagnie des eaux, 150
 T, Rue La Fayette, 280, JAUNE
-E, Prison -, -, PRISON
+E, Prison, null, null, PRISON
 T, Avenue de Breteuil, 300, VERT
 T, Avenue Foch, 300, VERT
-E, Caisse de communauté -, -, COMMUNAUTE
+E, Caisse de communauté, null, null, COMMUNAUTE
 T, Boulevard des Capucines, 320, VERT
-G, Gare Saint-Lazare, 200
-E, Chance -, -, CHANCE
-T, Avenue des Champs-Elysées, 350, BLEU
-E, Taxe de luxe -, -, TAXE
+G, Gare SaintnullLazare, 200
+E, Chance, null, null, CHANCE
+T, Avenue des ChampsnullElysées, 350, BLEU
+E, Taxe de luxe, null, null, TAXE
 T, Rue de la Paix, 400, BLEU

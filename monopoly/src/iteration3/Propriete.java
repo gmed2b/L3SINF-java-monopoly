@@ -42,9 +42,9 @@ public abstract class Propriete extends Case {
             Cli.achatReussi(this);
 
         } else if (this.getProprietaire() != joueur) {
-            System.out.println("Vous êtes sur le terrain de " + this.getProprietaire().getNom());
+            System.out.println("Vous êtes sur la propriété de " + this.getProprietaire().getNom());
         } else {
-            System.out.println("Vous êtes sur votre terrain");
+            System.out.println("Vous êtes sur votre propriété");
         }
     }
 

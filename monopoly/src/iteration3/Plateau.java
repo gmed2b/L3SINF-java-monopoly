@@ -76,18 +76,20 @@ public class Plateau {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
+
                 Character type = fields[0].charAt(0); // Type de case
                 String nom = fields[1].trim(); // Nom de la case
                 int tarifAchat = 0;
                 GroupeTerrain groupe = null;
                 EvenementSpecial.TypeEvenement typeEvenement = null;
-                if (fields.length > 2) {
+
+                if (fields.length > 2 && !fields[2].trim().equals("null")) {
                     tarifAchat = Integer.parseInt(fields[2].trim()); // Tarif d'achat
                 }
-                if (fields.length > 3) {
+                if (fields.length > 3 && !fields[3].trim().equals("null")) {
                     groupe = GroupeTerrain.valueOf(fields[3].trim()); // Groupe de terrain
                 }
-                if (fields.length > 4) {
+                if (fields.length > 4 && !fields[4].trim().equals("null")) {
                     typeEvenement = EvenementSpecial.TypeEvenement.valueOf(fields[4].trim()); // Type d'événement
                 }
 

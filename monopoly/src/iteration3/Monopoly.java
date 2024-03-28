@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import iteration3.Carte.TypeCarte;
+
 public class Monopoly {
 
     public final static int NB_TOURS_AVANT_ACHAT = 1;
@@ -93,34 +95,17 @@ public class Monopoly {
         }
     }
 
-    static int appliquerEffetCarte(Joueur joueur, String carteTiree) {
-        if (carteTiree.contains("Gagnez") || carteTiree.contains("Recevez")) {
-            // récupérer le montant (c'est le dernier mot de la phrase)
-            int montant = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 1].replace("€", ""));
-            return montant;
-        } else if (carteTiree.contains("Payez")) {
-            int montant = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 1].replace("€", ""));
-            return montant;
-        } else if (carteTiree.contains("Avancez")) {
-            // récupérer le nombre de case (c'est le avant dernier mot de la phrase)
-            int nbCases = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 2]);
-            return nbCases;
-        } else if (carteTiree.contains("Reculez")) {
-            int nbCases = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 2]);
-            return -nbCases;
-        }
-        return 0;
-    }
-
     private LinkedList<Carte> initialiserCartes(String csvFilePath) {
         LinkedList<Carte> cartes = new LinkedList<Carte>();
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
+
                 String description = fields[0].trim();
                 int effet = Integer.parseInt(fields[1].trim());
                 TypeCarte type = TypeCarte.valueOf(fields[2].trim());
+
                 cartes.add(new Carte(description, effet, type));
             }
             return cartes;
