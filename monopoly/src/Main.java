@@ -5,11 +5,13 @@ import iteration3.Monopoly;
 public class Main {
 
     public static void main(String[] args) {
-        String csvFilePath = "monopoly/src/plateau.csv";
-        String cartesCaisseCommunaute = "monopoly/src/cartesCaisseCommunaute.csv";
-        String cartesChance = "monopoly/src/cartesChance.csv";
+
+        String plateauCsv = "monopoly/src/plateau.csv";
+        String cartesCommunauteCsv = "monopoly/src/cartesCaisseCommunaute.csv";
+        String cartesChanceCsv = "monopoly/src/cartesChance.csv";
+
         try {
-            Monopoly jeu = new Monopoly(csvFilePath, cartesCaisseCommunaute, cartesChance);
+            Monopoly jeu = new Monopoly(plateauCsv, cartesCommunauteCsv, cartesChanceCsv);
             jeu.initialisationPartie();
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier CSV");

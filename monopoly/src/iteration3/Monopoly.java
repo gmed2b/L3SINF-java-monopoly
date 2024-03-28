@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Queue;
 
 public class Monopoly {
@@ -14,18 +13,17 @@ public class Monopoly {
     public final static int NB_TOURS_AVANT_ACHAT = 1;
     private final static int NB_JOUEURS = 2;
 
-    static Plateau plateau;
-    Queue<Carte> cartesCaisseCommunaute = new LinkedList<>();
-    Queue<Carte> cartesChance = new LinkedList<>();
-
+    public Plateau plateau;
+    public Queue<Carte> cartesCommunaute = new LinkedList<>();
+    public Queue<Carte> cartesChance = new LinkedList<>();
     private List<Joueur> joueurs;
     public static De de1;
     public static De de2;
 
-    public Monopoly(String csvFilePath, String cartesCaisseCommunaute, String cartesChance ) throws IOException {
-        this.plateau = new Plateau(csvFilePath);
-        this.cartesCaisseCommunaute = initialisationCartesCaisseCommunaute(cartesCaisseCommunaute)
-        this.cartesChance = new LinkedList<Carte>();
+    public Monopoly(String plateauCsv, String cartesCommunauteCsv, String cartesChanceCsv) throws IOException {
+        this.plateau = new Plateau(plateauCsv);
+        this.cartesCommunaute = initialiserCartes(cartesCommunauteCsv);
+        this.cartesChance = initialiserCartes(cartesChanceCsv);
         this.joueurs = new ArrayList<Joueur>();
         Monopoly.de1 = new De();
         Monopoly.de2 = new De();
@@ -43,7 +41,6 @@ public class Monopoly {
     private void commencerPartie() {
         while (this.partieToujoursEnCours()) {
             for (int i = 0; i < joueurs.size(); i++) {
-
                 Joueur joueurActuel = joueurs.get(i);
                 this.plateau.afficherPlateau(this.joueurs);
 
@@ -60,12 +57,11 @@ public class Monopoly {
                 // 3- Action case
                 Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
                 Cli.afficherCase(caseActuelle);
-                caseActuelle.action(joueurActuel);
+                caseActuelle.action(joueurActuel, this.plateau);
 
                 // 6- Fin de tour
                 Cli.endTurn();
             }
-
         }
 
         Cli.pressToContinue("");
@@ -116,9 +112,9 @@ public class Monopoly {
         return 0;
     }
 
-    private LinkedList<Carte> initialisationCartesCaisseCommunaute(String cartesCaisseCommunaute) {
+    private LinkedList<Carte> initialiserCartes(String csvFilePath) {
         LinkedList<Carte> cartes = new LinkedList<Carte>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(cartesCaisseCommunaute))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
@@ -134,21 +130,4 @@ public class Monopoly {
         return cartes;
     }
 
-    private LinkedList<Carte> initialisationCartesChance(String cartesChance) {
-        LinkedList<Carte> cartes = new LinkedList<Carte>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(cartesChance))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                String description = fields[0].trim();
-                int effet = Integer.parseInt(fields[1].trim());
-                TypeCarte type = TypeCarte.valueOf(fields[2].trim());
-                cartes.add(new Carte(description, effet, type));
-            }
-            return cartes;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return cartes;
-    }
 }

@@ -80,11 +80,15 @@ public class Plateau {
                 String nom = fields[1].trim(); // Nom de la case
                 int tarifAchat = 0;
                 GroupeTerrain groupe = null;
+                EvenementSpecial.TypeEvenement typeEvenement = null;
                 if (fields.length > 2) {
                     tarifAchat = Integer.parseInt(fields[2].trim()); // Tarif d'achat
                 }
                 if (fields.length > 3) {
                     groupe = GroupeTerrain.valueOf(fields[3].trim()); // Groupe de terrain
+                }
+                if (fields.length > 4) {
+                    typeEvenement = EvenementSpecial.TypeEvenement.valueOf(fields[4].trim()); // Type d'événement
                 }
 
                 Case nouvelleCase;
@@ -99,7 +103,7 @@ public class Plateau {
                         nouvelleCase = (ServicePublique) new ServicePublique(nom, tarifAchat);
                         break;
                     case 'E': // EvenementSpecial
-                        nouvelleCase = (EvenementSpecial) new EvenementSpecial(nom);
+                        nouvelleCase = (EvenementSpecial) new EvenementSpecial(nom, typeEvenement);
                         break;
                     default:
                         nouvelleCase = null;
