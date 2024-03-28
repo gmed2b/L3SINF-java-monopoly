@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Queue;
 
 public class Monopoly {
 
@@ -13,12 +15,17 @@ public class Monopoly {
     private final static int NB_JOUEURS = 2;
 
     static Plateau plateau;
+    Queue<Carte> cartesCaisseCommunaute = new LinkedList<>();
+    Queue<Carte> cartesChance = new LinkedList<>();
+
     private List<Joueur> joueurs;
     public static De de1;
     public static De de2;
 
-    public Monopoly(String csvFilePath) throws IOException {
+    public Monopoly(String csvFilePath, String cartesCaisseCommunaute, String cartesChance ) throws IOException {
         this.plateau = new Plateau(csvFilePath);
+        this.cartesCaisseCommunaute = initialisationCartesCaisseCommunaute(cartesCaisseCommunaute)
+        this.cartesChance = new LinkedList<Carte>();
         this.joueurs = new ArrayList<Joueur>();
         Monopoly.de1 = new De();
         Monopoly.de2 = new De();
@@ -89,6 +96,7 @@ public class Monopoly {
             this.joueurs.add(joueur);
         }
     }
+
     static int appliquerEffetCarte(Joueur joueur, String carteTiree) {
         if (carteTiree.contains("Gagnez") || carteTiree.contains("Recevez")) {
             // récupérer le montant (c'est le dernier mot de la phrase)
@@ -98,7 +106,7 @@ public class Monopoly {
             int montant = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 1].replace("€", ""));
             return montant;
         } else if (carteTiree.contains("Avancez")) {
-           // récupérer le nombre de case (c'est le avant dernier mot de la phrase)
+            // récupérer le nombre de case (c'est le avant dernier mot de la phrase)
             int nbCases = Integer.parseInt(carteTiree.split(" ")[carteTiree.split(" ").length - 2]);
             return nbCases;
         } else if (carteTiree.contains("Reculez")) {
@@ -106,5 +114,41 @@ public class Monopoly {
             return -nbCases;
         }
         return 0;
+    }
+
+    private LinkedList<Carte> initialisationCartesCaisseCommunaute(String cartesCaisseCommunaute) {
+        LinkedList<Carte> cartes = new LinkedList<Carte>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(cartesCaisseCommunaute))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                String description = fields[0].trim();
+                int effet = Integer.parseInt(fields[1].trim());
+                TypeCarte type = TypeCarte.valueOf(fields[2].trim());
+                cartes.add(new Carte(description, effet, type));
+            }
+            return cartes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cartes;
+    }
+
+    private LinkedList<Carte> initialisationCartesChance(String cartesChance) {
+        LinkedList<Carte> cartes = new LinkedList<Carte>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(cartesChance))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                String description = fields[0].trim();
+                int effet = Integer.parseInt(fields[1].trim());
+                TypeCarte type = TypeCarte.valueOf(fields[2].trim());
+                cartes.add(new Carte(description, effet, type));
+            }
+            return cartes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cartes;
     }
 }

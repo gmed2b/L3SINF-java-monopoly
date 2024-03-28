@@ -10,7 +10,6 @@ public class EvenementSpecial extends Case {
     public void action(Joueur joueur) {
 
         if (this.getNom().equals("Chance") || this.getNom().equals("Caisse de communauté") ) {
-         
         String card = joueur.tirerCarte(joueur, nom);
         int result = Monopoly.appliquerEffetCarte(joueur, card);
         if (card.contains("Gagnez") || card.contains("Recevez")) {
