@@ -17,28 +17,27 @@ public class EvenementSpecial extends Case {
 
     @Override
     public void action(Joueur joueur, Plateau plateau) {
+        if (this.type == TypeEvenement.CHANCE || this.type == TypeEvenement.COMMUNAUTE) {
+            Carte carte = this.type == TypeEvenement.CHANCE ? plateau.getCartesChance() : plateau.getCartesCommunaute();
+            System.out.println("Carte tirée : " + carte.texte);
+            if (carte.type == Carte.TypeCarte.GAGNER) {
+                joueur.crediter(carte.effet);
+                System.out.println("Vous avez gagné " + carte.effet + "€ !"); // à mettre dans le CLI
+            } else if (carte.type == Carte.TypeCarte.PAYER) {
+                try {
+                    joueur.debiter(carte.effet);
+                    System.out.println("Vous avez payé " + carte.effet + "€ !"); // à mettre dans le CLI
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (carte.type == Carte.TypeCarte.AVANCER) {
+                joueur.seDeplacer(carte.effet, plateau.getTaille());
+                System.out.println("Vous avancez de " + carte.effet + " cases !"); // à mettre dans le CLI
+            } else if (carte.type == Carte.TypeCarte.RECULER) {
+                joueur.seDeplacer(-carte.effet, plateau.getTaille());
+                System.out.println("Vous reculez de " + carte.effet + " cases !"); // à mettre dans le CLI
+            }
+        }
 
-        System.out.println(this.type);
-
-        // if (this.getNom().equals("Chance") || this.getNom().equals("Caisse de
-        // communauté")) {
-        // String card = joueur.tirerCarte(joueur, nom);
-        // int result = Monopoly.appliquerEffetCarte(joueur, card);
-        // if (card.contains("Gagnez") || card.contains("Recevez")) {
-        // joueur.crediter(result);
-        // } else if (card.contains("Payez")) {
-        // try {
-        // joueur.debiter(result);
-        // } catch (Exception e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
-        // } else if (card.contains("Avancez")) {
-        // joueur.seDeplacer(result, plateau.getTaille());
-        // } else if (card.contains("Reculez")) {
-        // joueur.seDeplacer(result, plateau.getTaille());
-        // }
-        // }
     }
-
 }

@@ -16,16 +16,12 @@ public class Monopoly {
     private final static int NB_JOUEURS = 2;
 
     public Plateau plateau;
-    public Queue<Carte> cartesCommunaute = new LinkedList<>();
-    public Queue<Carte> cartesChance = new LinkedList<>();
     private List<Joueur> joueurs;
     public static De de1;
     public static De de2;
 
     public Monopoly(String plateauCsv, String cartesCommunauteCsv, String cartesChanceCsv) throws IOException {
-        this.plateau = new Plateau(plateauCsv);
-        this.cartesCommunaute = initialiserCartes(cartesCommunauteCsv);
-        this.cartesChance = initialiserCartes(cartesChanceCsv);
+        this.plateau = new Plateau(plateauCsv, cartesCommunauteCsv, cartesChanceCsv );
         this.joueurs = new ArrayList<Joueur>();
         Monopoly.de1 = new De();
         Monopoly.de2 = new De();
@@ -95,24 +91,5 @@ public class Monopoly {
         }
     }
 
-    private LinkedList<Carte> initialiserCartes(String csvFilePath) {
-        LinkedList<Carte> cartes = new LinkedList<Carte>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-
-                String description = fields[0].trim();
-                int effet = Integer.parseInt(fields[1].trim());
-                TypeCarte type = TypeCarte.valueOf(fields[2].trim());
-
-                cartes.add(new Carte(description, effet, type));
-            }
-            return cartes;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return cartes;
-    }
 
 }

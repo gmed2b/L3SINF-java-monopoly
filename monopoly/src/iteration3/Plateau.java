@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
+import iteration3.Carte.TypeCarte;
 
 public class Plateau {
 
@@ -18,9 +22,13 @@ public class Plateau {
     public static final String PURPLE = "\u001B[35m";
 
     private List<Case> cases = new ArrayList<Case>();
+    public Queue<Carte> cartesCommunaute = new LinkedList<>();
+    public Queue<Carte> cartesChance = new LinkedList<>();
 
-    public Plateau(String csvFilePath) throws IOException {
+    public Plateau(String csvFilePath, String cartesCommunauteCsv, String cartesChanceCsv) throws IOException {
         this.initialiserPlateau(csvFilePath);
+        this.cartesCommunaute = initialiserCartes(cartesCommunauteCsv);
+        this.cartesChance = initialiserCartes(cartesChanceCsv);
     }
 
     public int getTaille() {
@@ -117,6 +125,38 @@ public class Plateau {
                 }
             }
         }
+    }
+
+    private LinkedList<Carte> initialiserCartes(String csvFilePath) {
+        LinkedList<Carte> cartes = new LinkedList<Carte>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                String description = fields[0].trim();
+                int effet = Integer.parseInt(fields[1].trim());
+                TypeCarte type = TypeCarte.valueOf(fields[2].trim());
+
+                cartes.add(new Carte(description, effet, type));
+            }
+            return cartes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cartes;
+    }
+
+    public Carte getCartesCommunaute() {
+        Carte carte = cartesCommunaute.poll();
+        cartesCommunaute.add(carte);
+        return carte;
+    }
+
+    public Carte getCartesChance() {
+        Carte carte = cartesChance.poll();
+        cartesChance.add(carte);
+        return carte;
     }
 
 }
