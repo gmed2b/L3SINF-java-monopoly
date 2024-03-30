@@ -27,25 +27,21 @@ public class EvenementSpecial extends Case {
                 switch (carte.type) {
                     case GAGNER:
                         joueur.crediter(carte.effet);
-                        Cli.afficherMessageSelonTypeCase(type, carte);
                         break;
                     case PAYER:
                         try {
                             joueur.debiter(carte.effet);
-                            Cli.afficherMessageSelonTypeCase(type, carte);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         break;
                     case AVANCER:
                         joueur.seDeplacer(carte.effet, plateau.getTaille());
-                        Cli.afficherMessageSelonTypeCase(type, carte);
                         Cli.afficherCase(caseActuelle);
                         caseActuelle.action(joueur, plateau);
                         break;
                     case RECULER:
                         joueur.seDeplacer(-carte.effet, plateau.getTaille());
-                        Cli.afficherMessageSelonTypeCase(type, carte);
                         Cli.afficherCase(caseActuelle);
                         caseActuelle.action(joueur, plateau);
                         break;
@@ -68,6 +64,7 @@ public class EvenementSpecial extends Case {
                 break;
             case PRISON:
                 Cli.afficherMessageSelonTypeCase(type, null);
+                plateau.envoyerEnPrison(joueur);
                 break;
             case DEPART:
                 Cli.afficherMessageSelonTypeCase(type, null);

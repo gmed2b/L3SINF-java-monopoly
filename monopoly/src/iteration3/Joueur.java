@@ -15,12 +15,16 @@ public class Joueur {
     private int position;
     private int nbTours;
     private int solde;
+    private boolean enPrison;
+    private int nbToursEnPrison;
 
     public Joueur(String nom) {
         setNom(nom);
         this.position = 0;
         this.nbTours = 0;
         this.solde = 1500; // Initialisation du solde du joueur par défaut
+        this.enPrison = false;
+        this.nbToursEnPrison = 0;
 
         NB_INSTANCE++;
     }
@@ -114,5 +118,29 @@ public class Joueur {
 
     public void crediter(int montant) {
         this.solde += montant;
+    }
+
+    public boolean isEnPrison() {
+        return enPrison;
+    }
+
+    public void mettreEnPrison() {
+        enPrison = true;
+    }
+
+    public void sortirDePrison() {
+        enPrison = false;
+    }
+
+    public int getNbToursEnPrison() {
+        return nbToursEnPrison;
+    }
+
+    public void incrémenterToursEnPrison() {
+        nbToursEnPrison++;
+    }
+
+    public void resetToursEnPrison() {
+        nbToursEnPrison = 0;
     }
 }

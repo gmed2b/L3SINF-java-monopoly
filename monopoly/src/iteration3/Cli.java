@@ -114,4 +114,13 @@ public class Cli {
                 break;
         }
     }
+
+    public static void afficherMessageSortiePrison() {
+        System.out.println("Vous êtes sorti de prison !");
+    }
+
+    public static void affichageEncorePrison() {
+        System.out.println("Vous êtes encore en prison !");
+    }
+
 }

@@ -45,6 +45,17 @@ public class Monopoly {
                 Cli.printPlayer(joueurActuel);
                 Cli.pressToContinue("Appuyez sur Entrée pour lancer les dés ...");
 
+                // Si le joueur est en prison
+                if (plateau.estEnPrison(joueurActuel)) {
+                    if (joueurActuel.getNbToursEnPrison() >= 3) {
+                        joueurActuel.sortirDePrison();
+                        joueurActuel.resetToursEnPrison();
+                        Cli.afficherMessageSortiePrison();
+                    } else {
+                        tenterSortirPrison(joueurActuel);
+                    }
+                }
+                else {
                 // 1- Lancer les dés
                 int scoreDes = joueurActuel.lancerDes();
                 Cli.afficherScoreDes(scoreDes);
@@ -59,6 +70,9 @@ public class Monopoly {
 
                 // 6- Fin de tour
                 Cli.endTurn();
+                }
+
+
             }
         }
 
@@ -91,5 +105,20 @@ public class Monopoly {
         }
     }
 
+
+    public void tenterSortirPrison(Joueur joueur) {
+        int lancer1 = de1.lancer();
+        int lancer2 = de2.lancer();
+        if (lancer1 == lancer2) {
+            joueur.sortirDePrison();
+            joueur.resetToursEnPrison();
+            Cli.afficherMessageSortiePrison();
+        } else {
+            joueur.incrémenterToursEnPrison();
+            Cli.affichageEncorePrison();
+        }
+        int scoreDes = lancer1 + lancer2;
+        Cli.afficherScoreDes(scoreDes);
+    }
 
 }

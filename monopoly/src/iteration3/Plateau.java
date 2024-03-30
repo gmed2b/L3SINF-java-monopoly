@@ -159,4 +159,11 @@ public class Plateau {
         return carte;
     }
 
+    public void envoyerEnPrison(Joueur joueur) {
+        joueur.mettreEnPrison();
+    }
+
+    public boolean estEnPrison(Joueur joueur) {
+        return joueur.isEnPrison();
+    }
 }
