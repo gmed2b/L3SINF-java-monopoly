@@ -83,4 +83,35 @@ public class Cli {
         return prompt(message, options);
     }
 
+    public static void afficherMessageSelonTypeCase(EvenementSpecial.TypeEvenement type, Carte carte) {
+        switch (type) {
+            case CHANCE:
+                System.out.println("Carte tirée : " + carte.texte);
+                break;
+            case COMMUNAUTE:
+                System.out.println("Carte tirée : " + carte.texte);
+                break;
+            case TAXE:
+                System.out.println("Vous avez payé 100€ !");
+                break;
+            case IMPOTS:
+                System.out.println("Vous avez payé 100€ !");
+                break;
+            case PARC:
+                System.out.println("Il n'y a rien à faire ici, au repos !");
+                break;
+            case VISITE:
+                System.out.println("Il n'y a rien à faire ici, au repos !");
+                break;
+            case PRISON:
+                System.out.println(
+                        "Attendez, j'vous connais !? Il n'y a pas d'erreur, vous êtes rechercher... Et il est temps de payer pour vos crimes !");
+                break;
+            case DEPART:
+                System.out.println("Tu es sur la case départ, tu gagnes 200€ !");
+                break;
+            default:
+                break;
+        }
+    }
 }

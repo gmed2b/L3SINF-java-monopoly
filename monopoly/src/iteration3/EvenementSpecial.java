@@ -17,33 +17,65 @@ public class EvenementSpecial extends Case {
 
     @Override
     public void action(Joueur joueur, Plateau plateau) {
-        if (this.type == TypeEvenement.CHANCE || this.type == TypeEvenement.COMMUNAUTE) {
-            Carte carte = this.type == TypeEvenement.CHANCE ? plateau.getCartesChance() : plateau.getCartesCommunaute();
-            System.out.println("Carte tirée : " + carte.texte); // à mettre dans le CLI
-            if (carte.type == Carte.TypeCarte.GAGNER) {
-                joueur.crediter(carte.effet);
-                System.out.println("Vous avez gagné " + carte.effet + "€ !"); // à mettre dans le CLI
-            } else if (carte.type == Carte.TypeCarte.PAYER) {
+        Case caseActuelle = plateau.getCase(joueur.getPosition());
+        switch (type) {
+            case CHANCE:
+            case COMMUNAUTE:
+                Carte carte = (type == TypeEvenement.CHANCE) ? plateau.getCartesChance()
+                        : plateau.getCartesCommunaute();
+                Cli.afficherMessageSelonTypeCase(type, carte);
+                switch (carte.type) {
+                    case GAGNER:
+                        joueur.crediter(carte.effet);
+                        Cli.afficherMessageSelonTypeCase(type, carte);
+                        break;
+                    case PAYER:
+                        try {
+                            joueur.debiter(carte.effet);
+                            Cli.afficherMessageSelonTypeCase(type, carte);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case AVANCER:
+                        joueur.seDeplacer(carte.effet, plateau.getTaille());
+                        Cli.afficherMessageSelonTypeCase(type, carte);
+                        Cli.afficherCase(caseActuelle);
+                        caseActuelle.action(joueur, plateau);
+                        break;
+                    case RECULER:
+                        joueur.seDeplacer(-carte.effet, plateau.getTaille());
+                        Cli.afficherMessageSelonTypeCase(type, carte);
+                        Cli.afficherCase(caseActuelle);
+                        caseActuelle.action(joueur, plateau);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case TAXE:
+            case IMPOTS:
                 try {
-                    joueur.debiter(carte.effet);
-                    System.out.println("Vous avez payé " + carte.effet + "€ !"); // à mettre dans le CLI
+                    joueur.debiter(100);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (carte.type == Carte.TypeCarte.AVANCER) {
-                joueur.seDeplacer(carte.effet, plateau.getTaille());
-                System.out.println("Vous avancez de " + carte.effet + " cases !"); // à mettre dans le CLI
-                Case caseActuelle = plateau.getCase(joueur.getPosition());
-                Cli.afficherCase(caseActuelle);
-                caseActuelle.action(joueur, plateau);
-            } else if (carte.type == Carte.TypeCarte.RECULER) {
-                joueur.seDeplacer(-carte.effet, plateau.getTaille());
-                System.out.println("Vous reculez de " + carte.effet + " cases !"); // à mettre dans le CLI
-                Case caseActuelle = plateau.getCase(joueur.getPosition());
-                Cli.afficherCase(caseActuelle);
-                caseActuelle.action(joueur, plateau);
-            }
+                Cli.afficherMessageSelonTypeCase(type, null);
+                break;
+            case PARC:
+            case VISITE:
+                Cli.afficherMessageSelonTypeCase(type, null);
+                break;
+            case PRISON:
+                Cli.afficherMessageSelonTypeCase(type, null);
+                break;
+            case DEPART:
+                Cli.afficherMessageSelonTypeCase(type, null);
+                joueur.crediter(200);
+                break;
+            default:
+                break;
         }
-
     }
+
 }
