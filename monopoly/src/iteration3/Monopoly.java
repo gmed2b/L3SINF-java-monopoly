@@ -21,7 +21,7 @@ public class Monopoly {
     public static De de2;
 
     public Monopoly(String plateauCsv, String cartesCommunauteCsv, String cartesChanceCsv) throws IOException {
-        this.plateau = new Plateau(plateauCsv, cartesCommunauteCsv, cartesChanceCsv );
+        this.plateau = new Plateau(plateauCsv, cartesCommunauteCsv, cartesChanceCsv);
         this.joueurs = new ArrayList<Joueur>();
         Monopoly.de1 = new De();
         Monopoly.de2 = new De();
@@ -49,29 +49,27 @@ public class Monopoly {
                 if (plateau.estEnPrison(joueurActuel)) {
                     if (joueurActuel.getNbToursEnPrison() >= 3) {
                         joueurActuel.sortirDePrison();
-                        joueurActuel.resetToursEnPrison();
+                        joueurActuel.reinitialiserToursEnPrison();
                         Cli.afficherMessageSortiePrison();
                     } else {
                         tenterSortirPrison(joueurActuel);
                     }
+                } else {
+                    // 1- Lancer les dés
+                    int scoreDes = joueurActuel.lancerDes();
+                    Cli.afficherScoreDes(scoreDes);
+
+                    // 2- Bouger le pion
+                    joueurActuel.seDeplacer(scoreDes, this.plateau.getTaille());
+
+                    // 3- Action case
+                    Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
+                    Cli.afficherCase(caseActuelle);
+                    caseActuelle.action(joueurActuel, this.plateau);
+
+                    // 6- Fin de tour
+                    Cli.endTurn();
                 }
-                else {
-                // 1- Lancer les dés
-                int scoreDes = joueurActuel.lancerDes();
-                Cli.afficherScoreDes(scoreDes);
-
-                // 2- Bouger le pion
-                joueurActuel.seDeplacer(scoreDes, this.plateau.getTaille());
-
-                // 3- Action case
-                Case caseActuelle = this.plateau.getCase(joueurActuel.getPosition());
-                Cli.afficherCase(caseActuelle);
-                caseActuelle.action(joueurActuel, this.plateau);
-
-                // 6- Fin de tour
-                Cli.endTurn();
-                }
-
 
             }
         }
@@ -105,16 +103,15 @@ public class Monopoly {
         }
     }
 
-
     public void tenterSortirPrison(Joueur joueur) {
         int lancer1 = de1.lancer();
         int lancer2 = de2.lancer();
         if (lancer1 == lancer2) {
             joueur.sortirDePrison();
-            joueur.resetToursEnPrison();
+            joueur.reinitialiserToursEnPrison();
             Cli.afficherMessageSortiePrison();
         } else {
-            joueur.incrémenterToursEnPrison();
+            joueur.incrementerToursEnPrison();
             Cli.affichageEncorePrison();
         }
         int scoreDes = lancer1 + lancer2;

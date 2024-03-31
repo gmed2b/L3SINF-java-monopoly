@@ -22,7 +22,7 @@ public class Joueur {
         setNom(nom);
         this.position = 0;
         this.nbTours = 0;
-        this.solde = 1500; // Initialisation du solde du joueur par défaut
+        this.solde = 1500;
         this.enPrison = false;
         this.nbToursEnPrison = 0;
 
@@ -120,7 +120,7 @@ public class Joueur {
         this.solde += montant;
     }
 
-    public boolean isEnPrison() {
+    public boolean estEnPrison() {
         return enPrison;
     }
 
@@ -136,11 +136,11 @@ public class Joueur {
         return nbToursEnPrison;
     }
 
-    public void incrémenterToursEnPrison() {
+    public void incrementerToursEnPrison() {
         nbToursEnPrison++;
     }
 
-    public void resetToursEnPrison() {
+    public void reinitialiserToursEnPrison() {
         nbToursEnPrison = 0;
     }
 }

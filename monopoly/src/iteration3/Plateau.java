@@ -164,6 +164,6 @@ public class Plateau {
     }
 
     public boolean estEnPrison(Joueur joueur) {
-        return joueur.isEnPrison();
+        return joueur.estEnPrison();
     }
 }
