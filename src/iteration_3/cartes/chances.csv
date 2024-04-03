@@ -1,0 +1,10 @@
+Rendez-vous à la Rue de la Paix ; DEPLACEMENT ; 39
+Vous êtes imposé pour les réparations de voirie, payez 150€ ; PERTE ; 150
+Rendez-vous Gare du Nord. Si vous passez par la case départ, recevez 200€ ; DEPLACEMENT ; 25
+Vous avez gagné le Hackathon. Recevez 200€ ; GAIN ; 200
+Reculez de trois cases ; MOUVEMENT ; -3
+Aller en prison. ; PRISON ; 10
+Votre immeuble et votre prêt rapportent. Recevez 200€ ; GAIN ; 200
+Avancer jusqu’à la case départ ; DEPLACEMENT ; 0
+Amende pour excès de vitesse 90€ ; PERTE ; 90
+La banque vous verse un dividende de 50€ ; GAIN ; 50

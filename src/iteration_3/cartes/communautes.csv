@@ -1,0 +1,10 @@
+Erreur de la banque en votre faveur. Recevez 100€ ; GAIN ; 100
+Dirigez-vous vers la case départ. ; DEPLACEMENT ; 0
+Payez la note du médecin 30€ ; PERTE ; 30
+La vente de votre stock vous rapporte. Touchez 60€ ; GAIN ; 60
+Avancez de 4 cases ; MOUVEMENT ; 4
+Les contributions vous remboursent la somme de 80€ ; GAIN ; 80
+Payez votre Police d’Assurance 50€ ; PERTE ; 50
+Aller en prison. ; PRISON ; 10
+Rendez-vous Gare du Nord. Si vous passez par la case départ, recevez 200€ ; DEPLACEMENT ; 25
+Amende pour ivresse 90€ ; PERTE ; 90
