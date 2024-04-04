@@ -13,7 +13,7 @@ public class Monopoly {
     public final static int MONTANT_IMPOTS = 200;
     public final static int NB_TOURS_EN_PRISON = 3;
 
-    private final static int NB_JOUEURS = 2;
+    private final static int NB_JOUEURS = 4;
     public final static int NB_TOURS_AVANT_ACHAT = 1;
 
     private Plateau plateau;
